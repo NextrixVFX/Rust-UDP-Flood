@@ -69,7 +69,7 @@ impl UdpKill {
     fn udp_packet (&self, data: String) -> () {
         match UdpSocket::bind("0.0.0.0:0") {
             Ok(socket) => {
-                socket.set_nonblocking(true).expect("Failed to set blocking mode."); // set blocking mode
+                socket.set_nonblocking(false).expect("Failed to set blocking mode."); // set blocking mode
                 let addr: String = format!("{}:{}", self.ip.to_string(), self.port.to_string()); // format ip:port
                 for _ in 0..self.multiplier {
                     if let Err(e) = socket.send_to(data.as_bytes(), &addr) { // send data
